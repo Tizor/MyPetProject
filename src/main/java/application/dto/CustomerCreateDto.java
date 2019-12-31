@@ -1,7 +1,6 @@
 package application.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -12,8 +11,9 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Customer", namespace = "http://application.dto")
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class CustomerCreateDto {
 
     private String firstName;

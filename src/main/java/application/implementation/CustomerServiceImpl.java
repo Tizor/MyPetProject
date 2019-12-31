@@ -25,6 +25,9 @@ public class CustomerServiceImpl implements CustomerService {
         this.customerMapper = customerMapper;
     }
 
+    public CustomerServiceImpl() {
+    }
+
     @Transactional
     public List<CustomerDto> getAllCustomers() {
         List<Customer> customersFromDBList = customerRepo.findAll();

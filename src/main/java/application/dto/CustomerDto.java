@@ -1,9 +1,7 @@
 package application.dto;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -14,8 +12,9 @@ import java.util.UUID;
 @XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Customer", namespace = "http://application.dto")
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class CustomerDto {
 
     private UUID id;
