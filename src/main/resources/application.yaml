@@ -15,5 +15,8 @@ hibernate:
     showSQL: true
     formatSQL: true
 
+
 cxf:
   path: /petProject
+
+
