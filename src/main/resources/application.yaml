@@ -6,11 +6,12 @@ spring:
     url: jdbc:postgresql://localhost:5432/onlineshop
     driverClassName: org.postgresql.Driver
     username: postgres
-    password:
+    password: root
 
 hibernate:
   properties:
     dialect: org.hibernate.dialect.PostgreSQL10Dialect
+#    dialect: org.hibernate.dialect.PostgreSQL95Dialect
 #    dialect: org.hibernate.dialect.HSQLDialect
     showSQL: true
     formatSQL: true

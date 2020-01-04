@@ -7,6 +7,7 @@ import org.hibernate.cfg.Environment;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -19,17 +20,21 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
+@EnableConfigurationProperties
 public class HibernateConfig {
 
+    @Value("${hibernate.properties.dialect}")
+    private String dialect;
+
+    @Value("${hibernate.properties.showSQL}")
+    private String showSQL;
+
+    @Value("${hibernate.properties.formatSQL}")
+    private String formatSQL;
 
     @Bean
     public DataSource getDataSource() {
-        DriverManagerDataSource DS = new DriverManagerDataSource();
-        DS.setUrl("jdbc:postgresql://localhost:5432/onlineshop");
-        DS.setUsername("postgres");
-        DS.setPassword("root");
-        DS.setDriverClassName("org.postgresql.Driver");
-        return DS;
+        return new DriverManagerDataSource();
     }
 
     @Bean
@@ -38,7 +43,9 @@ public class HibernateConfig {
         factoryBean.setDataSource(getDataSource());
 
         Properties props=new Properties();
-        props.setProperty(Environment.DIALECT, "org.hibernate.dialect.PostgreSQL95Dialect");
+        props.setProperty(Environment.DIALECT, dialect);
+        props.setProperty(Environment.SHOW_SQL, showSQL);
+        props.setProperty(Environment.FORMAT_SQL, formatSQL);
         factoryBean.setHibernateProperties(props);
         factoryBean.setAnnotatedClasses(Customer.class, CustomerDto.class);
         return factoryBean;
@@ -51,46 +58,4 @@ public class HibernateConfig {
         return transactionManager;
     }
 
-//    @Value("${hibernate.properties.dialect}")
-//    private String dialect;
-//
-//    @Value("${hibernate.properties.showQSL}")
-//    private String showQSL;
-//
-//    @Value("${hibernate.properties.formatSQL}")
-//    private String formatSQL;
-
-//    @Bean
-////    @ConfigurationProperties(prefix = "spring.datasource")
-//    public DriverManagerDataSource getDataSource() {
-//        DriverManagerDataSource DS = new DriverManagerDataSource();
-//        DS.setUrl("jdbc:postgresql://localhost:5432/onlineshop");
-//        DS.setUsername("postgres");
-//        DS.setPassword("root");
-//        DS.setDriverClassName("org.postgresql.Driver");
-//        return DS;
-//    }
-//
-//    @Bean
-//    public LocalSessionFactoryBean entityManagerFactory(){
-//        LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
-//        localSessionFactoryBean.setDataSource(getDataSource());
-//
-//        Properties properties = new Properties();
-//        properties.setProperty(Environment.DIALECT, "org.hibernate.dialect.PostgreSQL10Dialect");
-//        properties.setProperty(Environment.SHOW_SQL, "true");
-//        properties.setProperty(Environment.FORMAT_SQL, "true");
-//
-//        localSessionFactoryBean.setHibernateProperties(properties);
-//        localSessionFactoryBean.setAnnotatedClasses(Customer.class);
-//
-//        return localSessionFactoryBean;
-//    }
-//
-//    @Bean
-//    public HibernateTransactionManager getTransactionalManager(){
-//        HibernateTransactionManager hibernateTransactionManager = new HibernateTransactionManager();
-//        hibernateTransactionManager.setSessionFactory(entityManagerFactory().getObject());
-//        return hibernateTransactionManager;
-//    }
 }
