@@ -16,7 +16,7 @@ public interface CustomerService {
 
     @WebMethod(operationName = "getAllCustomers")
     @WebResult(name = "listOfCustomers")
-    Collection<CustomerDto> getAllCustomers();
+    List<CustomerDto> getAllCustomers();
 
     @WebMethod(operationName = "getCustomerById")
     @WebResult(name = "customerById")

@@ -6,24 +6,24 @@ import application.dto.CustomerDto;
 import application.entity.Customer;
 import application.mapper.CustomerMapper;
 import application.service.CustomerService;
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
+    @Autowired
     private CustomerRepo customerRepo;
+    @Autowired
     private CustomerMapper customerMapper;
 
-    public CustomerServiceImpl(CustomerRepo customerRepo, CustomerMapper customerMapper) {
-        this.customerRepo = customerRepo;
-        this.customerMapper = customerMapper;
-    }
+//    public CustomerServiceImpl(CustomerRepo customerRepo, CustomerMapper customerMapper) {
+//        this.customerRepo = customerRepo;
+//        this.customerMapper = customerMapper;
+//    }
 
     public CustomerServiceImpl() {
     }
