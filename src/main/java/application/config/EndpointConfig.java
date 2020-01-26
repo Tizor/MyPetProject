@@ -3,22 +3,20 @@ package application.config;
 import application.dao.CustomerRepo;
 import application.implementation.CustomerServiceImpl;
 import application.mapper.CustomerMapper;
+import lombok.RequiredArgsConstructor;
 import org.apache.cxf.Bus;
 import org.apache.cxf.bus.spring.SpringBus;
 import org.apache.cxf.jaxws.EndpointImpl;;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
 import javax.xml.ws.Endpoint;
 
 @Configuration
+@RequiredArgsConstructor
 public class EndpointConfig {
 
-    @Autowired
-    private CustomerRepo customerRepo;
-    @Autowired
-    private CustomerMapper customerMapper;
+    private final CustomerRepo customerRepo;
+    private final CustomerMapper customerMapper;
 
     @Bean
     public Endpoint customerEndpoint() {

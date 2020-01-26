@@ -1,37 +1,25 @@
 server:
   port: 8091
 
-
-
 spring:
+  basePackage: application
   datasource:
     jdbc-url: jdbc:postgresql://localhost:5432/onlineshop
     driverClassName: org.postgresql.Driver
     username: postgres
     password: root
 
-
-
-
-# Disable feature detection by this undocumented parameter. Check the org.hibernate.engine.jdbc.internal.JdbcServiceImpl.configure method for more details.
-
-  # Because detection is disabled you have to set correct dialect by hand.
-#  spring.jpa.database-platform=org.hibernate.dialect.PostgreSQL9Dialect
 hibernate:
   jdbc:
     lob:
       non_contextual_creation: true
   properties:
-#    dialect: org.hibernate.dialect.PostgreSQL10Dialect
     dialect: org.hibernate.dialect.PostgreSQL95Dialect # for java 11
-#    dialect: org.hibernate.dialect.HSQLDialect
     showSQL: true
     formatSQL: true
-
-
 
 
 cxf:
   path: /petProject
 
-debug: true
+debug: false

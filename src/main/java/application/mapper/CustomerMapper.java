@@ -5,12 +5,10 @@ import application.dto.CustomerDto;
 import application.entity.Customer;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
-@NoArgsConstructor
 public class CustomerMapper {
 
     public void mapCustomerFromCustomerCreateDto(Customer customer, CustomerCreateDto customerCreateDto) {

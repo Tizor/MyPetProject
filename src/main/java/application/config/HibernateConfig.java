@@ -1,32 +1,21 @@
 package application.config;
 
-
-import application.dto.CustomerDto;
-import application.entity.Customer;
 import org.hibernate.cfg.Environment;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.boot.autoconfigure.orm.jpa.HibernateProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-
 import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
 @EnableConfigurationProperties
-@EntityScan(basePackages = "application")
-@EnableJpaRepositories(basePackages = "application.dao")
 public class HibernateConfig {
 
     @Value("${hibernate.properties.dialect}")
@@ -38,20 +27,13 @@ public class HibernateConfig {
     @Value("${hibernate.properties.formatSQL}")
     private String formatSQL;
 
-//    @BeanЛ
-//    @ConfigurationProperties(prefix = "spring.datasource")
-//    public DataSource getDataSource() {
-//        return DataSourceBuilder.create().build();
-//    }
+    @Value("${spring.basePackage}")
+    private String basePackage;
 
-    @Bean(name = "dataSource")
+    @Bean
+    @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource getDataSource() {
-        DriverManagerDataSource  dataSourceBuilder = new DriverManagerDataSource ();
-        dataSourceBuilder.setDriverClassName("org.postgresql.Driver");
-        dataSourceBuilder.setUrl("jdbc:postgresql://localhost:5432/onlineshop");
-        dataSourceBuilder.setUsername("postgres");
-        dataSourceBuilder.setPassword("root");
-        return dataSourceBuilder;
+        return DataSourceBuilder.create().build();
     }
 
     @Bean
@@ -64,7 +46,7 @@ public class HibernateConfig {
         props.setProperty(Environment.SHOW_SQL, showSQL);
         props.setProperty(Environment.FORMAT_SQL, formatSQL);
         factoryBean.setHibernateProperties(props);
-        factoryBean.setAnnotatedClasses(Customer.class, CustomerDto.class);
+        factoryBean.setPackagesToScan(basePackage);
         return factoryBean;
     }
 
@@ -72,7 +54,6 @@ public class HibernateConfig {
     public HibernateTransactionManager transactionManager() {
         HibernateTransactionManager transactionManager = new HibernateTransactionManager();
         transactionManager.setSessionFactory(entityManagerFactory().getObject());
-        transactionManager.setDataSource(getDataSource());
         return transactionManager;
     }
 

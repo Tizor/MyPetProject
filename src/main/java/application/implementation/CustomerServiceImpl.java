@@ -6,25 +6,18 @@ import application.dto.CustomerDto;
 import application.entity.Customer;
 import application.mapper.CustomerMapper;
 import application.service.CustomerService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.UUID;
 
 @Service
-
+@RequiredArgsConstructor
 public class CustomerServiceImpl implements CustomerService {
 
-    private CustomerRepo customerRepo;
-    private CustomerMapper customerMapper;
-
-    public CustomerServiceImpl(CustomerRepo customerRepo, CustomerMapper customerMapper) {
-        this.customerRepo = customerRepo;
-        this.customerMapper = customerMapper;
-    }
-
-    public CustomerServiceImpl() {
-    }
+    private final CustomerRepo customerRepo;
+    private final CustomerMapper customerMapper;
 
     @Transactional
     public List<CustomerDto> getAllCustomers() {

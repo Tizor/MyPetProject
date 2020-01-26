@@ -1,14 +1,19 @@
 package application.entity;
 
-import lombok.*;
-
-import javax.persistence.*;
+import lombok.RequiredArgsConstructor;
+import lombok.Data;
+import javax.persistence.Table;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import java.util.UUID;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
+
 @Entity
+@Data
+@RequiredArgsConstructor
 @Table(name = "customer")
 public class Customer {
     @Id
