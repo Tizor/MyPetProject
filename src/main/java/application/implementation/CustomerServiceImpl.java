@@ -26,24 +26,33 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Transactional
-    public CustomerDto getCustomerById(UUID id) {
-        return null;
-    }
-
-    @Transactional
-    public CustomerDto updateCustomer(CustomerDto customer) {
-        return null;
-    }
-
-    @Transactional
-    public void deleteCustomer(UUID id) {
-
-    }
-
-    @Transactional
     public void addCustomer(CustomerCreateDto customer) {
         Customer newCustomer = new Customer();
         customerMapper.mapCustomerFromCustomerCreateDto(newCustomer, customer);
         customerRepo.save(newCustomer);
     }
+
+    @Transactional
+    public void deleteCustomer(UUID id) {
+        customerRepo.deleteById(id);
+    }
+
+    @Transactional
+    public CustomerDto getCustomerById(UUID id) {
+        Customer customerFromDB = customerRepo.getOne(id);
+        CustomerDto customerDto = new CustomerDto();
+        return customerMapper.mapCustomerDtoFromCustomer(customerFromDB, customerDto);
+    }
+
+    @Transactional
+    public CustomerDto updateCustomer(CustomerDto customer) {
+        Customer customerBeforeUpdate = customerRepo.getOne(customer.getId());
+        Customer customerForUpdate = customerMapper.mapCustomerFromCustomerDto(customerBeforeUpdate, customer);
+        Customer customerAfterUpdate = customerRepo.save(customerForUpdate);
+        return customerMapper.mapCustomerDtoFromCustomer(customerAfterUpdate, customer);
+    }
+
+
+
+
 }
