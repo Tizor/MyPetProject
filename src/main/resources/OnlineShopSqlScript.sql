@@ -1,7 +1,7 @@
 -- create database OnlineShop;
 
 create table customer (
-                          Id SERIAL PRIMARY KEY,
+                          Id uuid  NOT NULL DEFAULT uuid_generate_v4(),
                           FirstName text,
                           LastName text,
                           Age INTEGER,
