@@ -23,10 +23,10 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@EntityScan(basePackages = "application", basePackageClasses = Jsr310JpaConverters.class)
-@EnableJpaRepositories(basePackages = "application", basePackageClasses = Jsr310JpaConverters.class)
 @EnableTransactionManagement
 @EnableConfigurationProperties
+@EntityScan(basePackages = "application")
+@EnableJpaRepositories(basePackages = "application.dao")
 public class HibernateConfig {
 
     @Value("${hibernate.properties.dialect}")
@@ -38,7 +38,7 @@ public class HibernateConfig {
     @Value("${hibernate.properties.formatSQL}")
     private String formatSQL;
 
-//    @Bean
+//    @BeanЛ
 //    @ConfigurationProperties(prefix = "spring.datasource")
 //    public DataSource getDataSource() {
 //        return DataSourceBuilder.create().build();
@@ -69,7 +69,7 @@ public class HibernateConfig {
     }
 
     @Bean
-    public HibernateTransactionManager getTransactionManager() {
+    public HibernateTransactionManager transactionManager() {
         HibernateTransactionManager transactionManager = new HibernateTransactionManager();
         transactionManager.setSessionFactory(entityManagerFactory().getObject());
         transactionManager.setDataSource(getDataSource());

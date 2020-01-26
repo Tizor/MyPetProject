@@ -7,7 +7,6 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
-import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -30,6 +29,6 @@ public interface CustomerService {
     void deleteCustomer(@WebParam(name = "id") UUID id);
 
     @WebMethod(operationName = "addCustomer")
-    void updateCustomer(@WebParam(name = "customer") CustomerCreateDto customer);
+    void addCustomer(@WebParam(name = "customer") CustomerCreateDto customer);
 
 }

@@ -6,6 +6,8 @@ import application.dto.CustomerDto;
 import application.entity.Customer;
 import application.mapper.CustomerMapper;
 import application.service.CustomerService;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,20 +15,12 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
+@AllArgsConstructor
+@NoArgsConstructor
 public class CustomerServiceImpl implements CustomerService {
 
-    @Autowired
     private CustomerRepo customerRepo;
-    @Autowired
     private CustomerMapper customerMapper;
-
-//    public CustomerServiceImpl(CustomerRepo customerRepo, CustomerMapper customerMapper) {
-//        this.customerRepo = customerRepo;
-//        this.customerMapper = customerMapper;
-//    }
-
-    public CustomerServiceImpl() {
-    }
 
     @Transactional
     public List<CustomerDto> getAllCustomers() {
@@ -50,7 +44,9 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Transactional
-    public void updateCustomer(CustomerCreateDto customer) {
-
+    public void addCustomer(CustomerCreateDto customer) {
+        Customer newCustomer = new Customer();
+        customerMapper.mapCustomerFromCustomerCreateDto(newCustomer, customer);
+        customerRepo.save(newCustomer);
     }
 }
