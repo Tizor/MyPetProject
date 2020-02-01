@@ -8,7 +8,9 @@ spring:
     driverClassName: org.postgresql.Driver
     username: postgres
     password: root
-
+  liquibase:
+    enabled: true
+    change-log: classpath:/changelogs/liquibase-changeLog3.xml
 hibernate:
   jdbc:
     lob:

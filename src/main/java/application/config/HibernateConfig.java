@@ -1,5 +1,6 @@
 package application.config;
 
+import liquibase.integration.spring.SpringLiquibase;
 import org.hibernate.cfg.Environment;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -55,6 +56,14 @@ public class HibernateConfig {
         HibernateTransactionManager transactionManager = new HibernateTransactionManager();
         transactionManager.setSessionFactory(entityManagerFactory().getObject());
         return transactionManager;
+    }
+
+    @Bean
+    public SpringLiquibase liquibase() {
+        SpringLiquibase liquibase = new SpringLiquibase();
+        liquibase.setChangeLog("classpath:changelogs/liquibase-changeLog.xml");
+        liquibase.setDataSource(getDataSource());
+        return liquibase;
     }
 
 }
