@@ -60,7 +60,7 @@ public class HibernateConfig {
     }
 
     @Bean
-    @ConfigurationProperties(prefix = "datasource.liquibase")
+    @ConfigurationProperties(prefix = "spring.liquibase")
     public LiquibaseProperties liquibaseProperties() {
         return new LiquibaseProperties();
     }
