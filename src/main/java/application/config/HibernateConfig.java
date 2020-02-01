@@ -3,6 +3,7 @@ package application.config;
 import liquibase.integration.spring.SpringLiquibase;
 import org.hibernate.cfg.Environment;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
@@ -59,10 +60,27 @@ public class HibernateConfig {
     }
 
     @Bean
+    @ConfigurationProperties(prefix = "datasource.liquibase")
+    public LiquibaseProperties liquibaseProperties() {
+        return new LiquibaseProperties();
+    }
+
+    @Bean
     public SpringLiquibase liquibase() {
+        return springLiquibase(getDataSource(), liquibaseProperties());
+    }
+
+    private SpringLiquibase springLiquibase(DataSource dataSource, LiquibaseProperties properties) {
         SpringLiquibase liquibase = new SpringLiquibase();
-        liquibase.setChangeLog("classpath:changelogs/liquibase-changeLog.xml");
-        liquibase.setDataSource(getDataSource());
+        liquibase.setDataSource(dataSource);
+        liquibase.setChangeLog(properties.getChangeLog());
+        liquibase.setContexts(properties.getContexts());
+        liquibase.setDefaultSchema(properties.getDefaultSchema());
+        liquibase.setDropFirst(properties.isDropFirst());
+        liquibase.setShouldRun(properties.isEnabled());
+        liquibase.setLabels(properties.getLabels());
+        liquibase.setChangeLogParameters(properties.getParameters());
+        liquibase.setRollbackFile(properties.getRollbackFile());
         return liquibase;
     }
 

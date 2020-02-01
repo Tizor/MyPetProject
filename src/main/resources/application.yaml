@@ -8,9 +8,7 @@ spring:
     driverClassName: org.postgresql.Driver
     username: postgres
     password: root
-  liquibase:
-    enabled: true
-    change-log: classpath:/changelogs/liquibase-changeLog3.xml
+
 hibernate:
   jdbc:
     lob:
@@ -25,3 +23,11 @@ cxf:
   path: /petProject
 
 debug: false
+
+datasource:
+  liquibase:
+    url: jdbc:postgresql://localhost:5432/onlineshop
+    username: postgres
+    password: root
+    changeLog: classpath:/changelogs/liquibase-changeLog.xml
+
