@@ -74,13 +74,13 @@ public class HibernateConfig {
         SpringLiquibase liquibase = new SpringLiquibase();
         liquibase.setDataSource(dataSource);
         liquibase.setChangeLog(properties.getChangeLog());
-        liquibase.setContexts(properties.getContexts());
-        liquibase.setDefaultSchema(properties.getDefaultSchema());
-        liquibase.setDropFirst(properties.isDropFirst());
-        liquibase.setShouldRun(properties.isEnabled());
-        liquibase.setLabels(properties.getLabels());
-        liquibase.setChangeLogParameters(properties.getParameters());
-        liquibase.setRollbackFile(properties.getRollbackFile());
+        liquibase.setContexts(properties.getContexts()); // Контексты Liquibase для выполнения, которые могут быть разделены ",", если требуется несколько контекстов. Если контекст не указан, тогда будут выполняться ВСЕ контексты.
+        liquibase.setDefaultSchema(properties.getDefaultSchema()); // Следует ли игнорировать имя схемы
+        liquibase.setDropFirst(properties.isDropFirst()); // Следует ли выполнить удаление базы данных перед выполнением изменения. Значение по умолчанию : false.
+        liquibase.setShouldRun(properties.isEnabled()); // Отключение Liquibase на старте
+        liquibase.setLabels(properties.getLabels()); // Метки Liquibase для выполнения, которые могут быть разделены ",", если требуется несколько меток или более сложное выражение. Если метка не указана, тогда ВСЕ все будут выполнены.
+        liquibase.setChangeLogParameters(properties.getParameters()); // Параметры ChangeLog
+        liquibase.setRollbackFile(properties.getRollbackFile()); // Сыылка из .yaml на rollback file. У меня такой ссылки нет
         return liquibase;
     }
 
