@@ -12,7 +12,7 @@ spring:
     url: jdbc:postgresql://localhost:5432/onlineshop
     username: postgres
     password: root
-    changeLog: classpath:/changelogs/liquibase-changeLog.xml
+    changeLog: classpath:/changelogs/liquibase-changeLog.xml # файл который будет использоваться при запуске
     enabled: true
 
 hibernate:

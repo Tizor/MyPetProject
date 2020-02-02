@@ -1,0 +1,48 @@
+// Файл для генерации changeLog с помощью Liquibase gradle plugin
+
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "org.liquibase:liquibase-gradle-plugin:2.0.1"
+    }
+}
+
+
+dependencies {
+    liquibaseRuntime 'org.liquibase:liquibase-core:3.6.3'
+    liquibaseRuntime 'org.postgresql:postgresql:42.2.9'
+    liquibaseRuntime sourceSets.main.output
+}
+
+liquibase {
+
+//    activities {
+//        Properties liquibaseProps = new Properties()
+//        liquibaseProps.load(new FileInputStream("src/main/resources/application.yaml"))
+//        main {
+//
+//            driver  liquibaseProps.getProperty("spring.datasource.driverClassName")
+//            url  liquibaseProps.getProperty("spring.liquibase.url")
+//            username  liquibaseProps.getProperty("spring.liquibase.username")
+//            password  liquibaseProps.getProperty("spring.liquibase.password")
+//            changeLogFile  liquibaseProps.getProperty("spring.liquibase.changeLog")
+//        }
+//    }
+
+    activities {
+        main {
+            driver 'org.postgresql.Driver'
+            url 'jdbc:postgresql://localhost:5432/onlineshop'
+            username 'postgres'
+            password 'root'
+            changeLogFile 'src/main/resources/changelogs/liquibase-changeLog8.xml' // файл который будет сгенерирован
+        }
+    }
+
+}
+
