@@ -4,23 +4,36 @@ server:
 spring:
   basePackage: application
   datasource:
-    jdbc-url: jdbc:postgresql://localhost:5432/onlineshop
-    driverClassName: org.postgresql.Driver
-    username: postgres
-    password: root
+
+#    jdbc-url: jdbc:postgresql://localhost:5432/onlineshop
+#    driverClassName: org.postgresql.Driver
+#    username: postgres
+#    password: root
+
+    jdbc-url: jdbc:h2:mem:testdb2;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driverClassName: org.h2.Driver
+    username: test
+    password: test
   liquibase:
-    url: jdbc:postgresql://localhost:5432/onlineshop
-    username: postgres
-    password: root
-    changeLog: classpath:/changelogs/liquibase-changeLog.xml # файл который будет использоваться при запуске
+    url: jdbc:h2:mem:testdb2;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: test
+    password: test
+#    url: jdbc:postgresql://localhost:5432/onlineshop
+#    username: postgres
+#    password: root
+    changeLog: classpath:/changelogs/liquibase-changeLog4.xml # файл который будет использоваться при запуске
     enabled: true
+  jpa:
+    hibernate:
+      ddl-auto: validate # Это нужно для того, чтобы Hibernate не выполнял никаких действий по модификации схемы, т.к. теперь их будет делать Liquibase.
 
 hibernate:
   jdbc:
     lob:
       non_contextual_creation: true
   properties:
-    dialect: org.hibernate.dialect.PostgreSQL95Dialect # for java 11
+#    dialect: org.hibernate.dialect.PostgreSQL95Dialect # for java 11
+    dialect: org.hibernate.dialect.H2Dialect # for java 11
     showSQL: true
     formatSQL: true
 

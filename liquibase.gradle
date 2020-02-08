@@ -16,6 +16,7 @@ buildscript {
 dependencies {
     liquibaseRuntime 'org.liquibase:liquibase-core:3.6.3'
     liquibaseRuntime 'org.postgresql:postgresql:42.2.9'
+    liquibaseRuntime 'com.h2database:h2:1.4.197'
     liquibaseRuntime sourceSets.main.output
 }
 
@@ -35,12 +36,20 @@ liquibase {
 //    }
 
     activities {
+//        main {
+//            driver 'org.postgresql.Driver'
+//            url 'jdbc:postgresql://localhost:5432/onlineshop'
+//            username 'postgres'
+//            password 'root'
+//            changeLogFile 'src/main/resources/changelogs/liquibase-changeLog.xml' // файл который будет сгенерирован
+//        }
+
         main {
-            driver 'org.postgresql.Driver'
-            url 'jdbc:postgresql://localhost:5432/onlineshop'
-            username 'postgres'
-            password 'root'
-            changeLogFile 'src/main/resources/changelogs/liquibase-changeLog8.xml' // файл который будет сгенерирован
+            driver 'org.h2.Driver'
+            url 'jdbc:h2:mem:testdb'
+            username 'test'
+            password 'test'
+            changeLogFile 'src/main/resources/changelogs/liquibase-changeLog.xml' // файл который будет сгенерирован
         }
     }
 

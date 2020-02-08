@@ -25,6 +25,7 @@ dependencies {
 
     //DB & Liquibase
     compile group: 'org.postgresql', name: 'postgresql', version: '42.2.9'
+    runtime group: 'com.h2database', name: 'h2', version: '1.4.197'
     implementation ('org.liquibase:liquibase-core:3.6.3') {exclude group: 'org.yaml', module: 'snakeyaml'}
 
     //Others
