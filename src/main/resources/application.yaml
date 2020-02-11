@@ -10,22 +10,27 @@ spring:
 #    username: postgres
 #    password: root
 
-    jdbc-url: jdbc:h2:mem:testdb2;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    jdbc-url: jdbc:h2:file:./sample2;INIT=runscript from 'classpath:/OnlineShopSqlScript2.sql'
     driverClassName: org.h2.Driver
-    username: test
-    password: test
+    username: sa
+    password:
+
   liquibase:
-    url: jdbc:h2:mem:testdb2;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-    username: test
-    password: test
+    url: jdbc:h2:mem:testdb2;DB_CLOSE_ON_EXIT=TRUE;
+#    username: test
+#    password: test
 #    url: jdbc:postgresql://localhost:5432/onlineshop
 #    username: postgres
 #    password: root
     changeLog: classpath:/changelogs/liquibase-changeLog4.xml # файл который будет использоваться при запуске
-    enabled: true
+    enabled: false
   jpa:
     hibernate:
-      ddl-auto: validate # Это нужно для того, чтобы Hibernate не выполнял никаких действий по модификации схемы, т.к. теперь их будет делать Liquibase.
+      ddl-auto: create # Это нужно для того, чтобы Hibernate не выполнял никаких действий по модификации схемы, т.к. теперь их будет делать Liquibase.
+  h2:
+    console:
+      enabled: true
+      path: /h2
 
 hibernate:
   jdbc:
