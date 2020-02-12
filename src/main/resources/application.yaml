@@ -4,32 +4,36 @@ server:
 spring:
   basePackage: application
   datasource:
+    jdbc-url: jdbc:postgresql://localhost:5432/onlineshop
+    driverClassName: org.postgresql.Driver
+    username: postgres
+    password: root
 
-#    jdbc-url: jdbc:postgresql://localhost:5432/onlineshop
-#    driverClassName: org.postgresql.Driver
-#    username: postgres
-#    password: root
+    #H2 DB Settings #
 
-    jdbc-url: jdbc:h2:file:./sample2;INIT=runscript from 'classpath:/OnlineShopSqlScript2.sql'
-    driverClassName: org.h2.Driver
-    username: sa
-    password:
+#    jdbc-url: jdbc:h2:mem:TestDB;DB_CLOSE_DELAY=-1;INIT=RUNSCRIPT FROM 'classpath:OnlineShopSqlScript2.sql' # подругзка данных из файла
+#    jdbc-url: jdbc:h2:mem:TestDB;DB_CLOSE_DELAY=-1 # при накатке данных из change-log.xml
+#    driverClassName: org.h2.Driver
+#    username: test
+#    password:
 
   liquibase:
-    url: jdbc:h2:mem:testdb2;DB_CLOSE_ON_EXIT=TRUE;
-#    username: test
-#    password: test
-#    url: jdbc:postgresql://localhost:5432/onlineshop
-#    username: postgres
-#    password: root
-    changeLog: classpath:/changelogs/liquibase-changeLog4.xml # файл который будет использоваться при запуске
+    url: jdbc:postgresql://localhost:5432/onlineshop
+    username: postgres
+    password: root
+    changeLog: classpath:/changelogs/liquibase-changeLog2.xml # файл который будет использоваться при запуске
+      #H2 LiquiBase DB Settings #
+#      url: jdbc:h2:mem:TestDB;DB_CLOSE_DELAY=-1
+#      username: test
+#      password:
+#      changeLog: classpath:/changelogs/liquibase-changeLog3.xml # файл который будет использоваться при запуске
     enabled: false
   jpa:
     hibernate:
-      ddl-auto: create # Это нужно для того, чтобы Hibernate не выполнял никаких действий по модификации схемы, т.к. теперь их будет делать Liquibase.
+      ddl-auto: none # Это нужно для того, чтобы Hibernate не выполнял никаких действий по модификации схемы, т.к. теперь их будет делать Liquibase.
   h2:
     console:
-      enabled: true
+      enabled: false
       path: /h2
 
 hibernate:
@@ -37,8 +41,8 @@ hibernate:
     lob:
       non_contextual_creation: true
   properties:
-#    dialect: org.hibernate.dialect.PostgreSQL95Dialect # for java 11
-    dialect: org.hibernate.dialect.H2Dialect # for java 11
+    dialect: org.hibernate.dialect.PostgreSQL95Dialect # for java 11
+#    dialect: org.hibernate.dialect.H2Dialect # for java 11
     showSQL: true
     formatSQL: true
 
