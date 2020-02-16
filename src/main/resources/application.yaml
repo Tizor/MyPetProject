@@ -1,6 +1,5 @@
 server:
   port: 8091
-
 spring:
   basePackage: application
   datasource:
@@ -8,26 +7,30 @@ spring:
     driverClassName: org.postgresql.Driver
     username: postgres
     password: root
-
+#---------------------------------------------------------------------------------------------------------------#
     #H2 DB Settings #
-
 #    jdbc-url: jdbc:h2:mem:TestDB;DB_CLOSE_DELAY=-1;INIT=RUNSCRIPT FROM 'classpath:OnlineShopSqlScript2.sql' # подругзка данных из файла
 #    jdbc-url: jdbc:h2:mem:TestDB;DB_CLOSE_DELAY=-1 # при накатке данных из change-log.xml
 #    driverClassName: org.h2.Driver
 #    username: test
 #    password:
-
+#---------------------------------------------------------------------------------------------------------------#
   liquibase:
     url: jdbc:postgresql://localhost:5432/onlineshop
     username: postgres
     password: root
-    changeLog: classpath:/changelogs/liquibase-changeLog2.xml # файл который будет использоваться при запуске
+    changeLog: classpath:/changelogs/liquibase-changeLog-master.xml # файл который будет использоваться при запуске
+#       Паттерн именования changeLog файлов [год-месяц-день--номерФайла-название]
+#       2013-03-02--01-initial-schema-import.xml
+#---------------------------------------------------------------------------------------------------------------#
       #H2 LiquiBase DB Settings #
 #      url: jdbc:h2:mem:TestDB;DB_CLOSE_DELAY=-1
 #      username: test
 #      password:
 #      changeLog: classpath:/changelogs/liquibase-changeLog3.xml # файл который будет использоваться при запуске
     enabled: false
+    contexts: example
+  #---------------------------------------------------------------------------------------------------------------#
   jpa:
     hibernate:
       ddl-auto: none # Это нужно для того, чтобы Hibernate не выполнял никаких действий по модификации схемы, т.к. теперь их будет делать Liquibase.
@@ -36,6 +39,7 @@ spring:
       enabled: false
       path: /h2
 
+#---------------------------------------------------------------------------------------------------------------#
 hibernate:
   jdbc:
     lob:

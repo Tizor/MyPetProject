@@ -1,9 +1,6 @@
 plugins {
     id 'java'
-    id 'org.liquibase.gradle' version '2.0.1'
 }
-
-apply from: 'liquibase.gradle' // настройки Liquibase скрипта в liquibase.gradle
 
 group 'SoapOnlineShop'
 version '1.1-SNAPSHOT'
