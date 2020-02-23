@@ -4,5 +4,5 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
-    <include file="db-migrations/v-1.0/liquibase-changeLog-v.1.0-master.xml" relativeToChangelogFile="true" />
+    <include file="/2020-02-15--01-base_tables.xml" relativeToChangelogFile="true" />
 </databaseChangeLog>

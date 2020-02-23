@@ -2,26 +2,26 @@
 
 // Файл для генерации changeLog с помощью Liquibase gradle plugin
 
-buildscript {
-    repositories {
-        mavenCentral()
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
-    }
-    dependencies {
-        classpath "org.liquibase:liquibase-gradle-plugin:2.0.1"
-        classpath "org.liquibase:liquibase-core:3.6.3"
-    }
-}
+//buildscript {
+//    repositories {
+//        mavenCentral()
+//        maven {
+//            url "https://plugins.gradle.org/m2/"
+//        }
+//    }
+//    dependencies {
+//        classpath "org.liquibase:liquibase-gradle-plugin:2.0.1"
+//        classpath "org.liquibase:liquibase-core:3.6.3"
+//    }
+//}
 
 
-dependencies {
-    liquibaseRuntime 'org.liquibase:liquibase-core:3.6.3'
-    liquibaseRuntime 'org.postgresql:postgresql:42.2.9'
-    liquibaseRuntime 'com.h2database:h2:1.4.197'
-    liquibaseRuntime sourceSets.main.output
-}
+//dependencies {
+//    liquibaseRuntime 'org.liquibase:liquibase-core:3.6.3'
+//    liquibaseRuntime 'org.postgresql:postgresql:42.2.9'
+//    liquibaseRuntime 'com.h2database:h2:1.4.197'
+//    liquibaseRuntime sourceSets.main.output
+//}
 
 //tag (type: JavaExec) {
 //        def requiresValue = true
@@ -41,7 +41,7 @@ dependencies {
 //    def requiresValue = "Two"
 //}
 
-task hello(type: JavaExec, dependsOn: tag) {
+//task hello(type: JavaExec, dependsOn: tag) {
 
 //    classpath = sourceSets.main.runtimeClasspath
 //    main = javaMainClass
@@ -50,7 +50,7 @@ task hello(type: JavaExec, dependsOn: tag) {
 //    main 'org.liquibase.integration.commandline.Main'
 
 
-    tag {
+//    tag {
         requiresValue 'true'
 //        command 'dbDoc'
 //        classpath = sourceSets.main.runtimeClasspath
@@ -60,10 +60,10 @@ task hello(type: JavaExec, dependsOn: tag) {
 //
 //        command 'liquibaseCommandValue=5'
 //        requiresValue 'five'
-        args 'five'
-    }
-
-}
+//        args 'five'
+//    }
+//
+//}
 
 //task(runJavaExecNormal, dependsOn: 'classes', type: JavaExec) {
 //    main = 'com.examples.AllJvmArgumentsInJavaExecBug'
@@ -75,39 +75,39 @@ task hello(type: JavaExec, dependsOn: tag) {
 //
 //}
 
-task cucumber() {
-        javaexec {
-            main = "cucumber.api.cli.Main"
-            classpath = configurations.cucumberRuntime
-            args = ['--plugin', 'pretty', '--glue', 'src/test/groovy', 'src/test/resources']
-
-        }
-}
-
-
-liquibase {
-
-    tag {
+//task cucumber() {
+//        javaexec {
+//            main = "cucumber.api.cli.Main"
+//            classpath = configurations.cucumberRuntime
+//            args = ['--plugin', 'pretty', '--glue', 'src/test/groovy', 'src/test/resources']
+//
+//        }
+//}
+//
+//
+//liquibase {
+//
+//    tag {
 //        command = 'hiu'
         requiresValue 'true'
 //        args 'appArg1'
 ////        args = 'appArg1'
 ////        requiresValue 'true'
-        args('five')
-    }
+//        args('five')
+//    }
 
-    activities {
+//    activities {
 
 
 
 //main function for Postgres DB
-        main {
-            driver 'org.postgresql.Driver'
-            url 'jdbc:postgresql://localhost:5432/onlineshop'
-            username 'postgres'
-            password 'root'
-            changeLogFile 'src/main/resources/changelogs/liquibase-changeLog-master.xml' // файл который будет сгенерирован
-        }
+//        main {
+//            driver 'org.postgresql.Driver'
+//            url 'jdbc:postgresql://localhost:5432/onlineshop'
+//            username 'postgres'
+//            password 'root'
+//            changeLogFile 'src/main/resources/changelogs/liquibase-changeLog-master.xml' // файл который будет сгенерирован
+//        }
 
 
 
@@ -120,7 +120,7 @@ liquibase {
 //            password 'test'
 //            changeLogFile 'src/main/resources/changelogs/liquibase-changeLog.xml' // файл который будет сгенерирован
 //        }
-    }
-
-}
+//    }
+//
+//}
 

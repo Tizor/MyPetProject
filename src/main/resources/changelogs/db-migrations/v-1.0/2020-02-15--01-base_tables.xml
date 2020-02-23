@@ -1,0 +1,175 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <changeSet author="Admin (generated)" id="1581764121607-1">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="customer"/>
+            </not>
+        </preConditions>
+        <createTable tableName="customer">
+            <column defaultValueComputed="uuid_generate_v4()" name="id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="firstname" type="TEXT"/>
+            <column name="lastname" type="TEXT"/>
+            <column name="age" type="INTEGER"/>
+            <column name="email" type="TEXT"/>
+            <column name="address" type="TEXT"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Admin" id="1581764121607-2">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="product"/>
+            </not>
+        </preConditions>
+        <createTable tableName="product">
+            <column defaultValueComputed="uuid_generate_v4()" name="productId" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="productPrice" type="BIGINT"/>
+            <column name="productAmount" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Admin" id="1581764121607-3">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="final_order"/>
+            </not>
+        </preConditions>
+        <createTable tableName="final_order">
+            <column defaultValueComputed="uuid_generate_v4()" name="orderId" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="customerID" type="UUID"/>
+            <column name="cartID" type="UUID"/>
+            <column name="totalPrice" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1581764121607-4" author="Admin">
+        <addUniqueConstraint
+                columnNames="id"
+                constraintName="id"
+                tableName="customer"
+        />
+    </changeSet>
+
+    <changeSet id="1581764121607-5" author="Admin">
+        <addForeignKeyConstraint baseColumnNames="customerID"
+                                 baseTableCatalogName="cat"
+                                 baseTableName="final_order"
+                                 baseTableSchemaName="public"
+                                 constraintName="fk_final_order_customerID"
+                                 deferrable="true"
+                                 initiallyDeferred="true"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableCatalogName="cat"
+                                 referencedTableName="customer"
+                                 referencedTableSchemaName="public"
+                                 validate="true"/>
+    </changeSet>
+
+    <changeSet author="Admin" id="1581764121607-6">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="cart"/>
+            </not>
+        </preConditions>
+        <createTable tableName="cart">
+            <column defaultValueComputed="uuid_generate_v4()" name="cartId" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="productID" type="UUID"/>
+            <column name="totalPriceForProduct" type="BIGINT"/>
+            <column name="totalPriceForCart" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1581764121607-7" author="Admin">
+        <addUniqueConstraint
+                columnNames="cartId"
+                constraintName="cartId"
+                tableName="cart"
+        />
+    </changeSet>
+
+    <changeSet id="1581764121607-8" author="Admin">
+        <addUniqueConstraint
+                columnNames="productId"
+                constraintName="productId"
+                tableName="product"
+        />
+    </changeSet>
+
+    <changeSet id="1581764121607-9" author="Admin">
+        <addForeignKeyConstraint baseColumnNames="cartID"
+                                 baseTableCatalogName="cat"
+                                 baseTableName="final_order"
+                                 baseTableSchemaName="public"
+                                 constraintName="fk_final_order_cartID"
+                                 deferrable="true"
+                                 initiallyDeferred="true"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="cartId"
+                                 referencedTableCatalogName="cat"
+                                 referencedTableName="cart"
+                                 referencedTableSchemaName="public"
+                                 validate="true"/>
+    </changeSet>
+
+    <changeSet id="1581764121607-10" author="Admin">
+        <addForeignKeyConstraint baseColumnNames="productID"
+                                 baseTableCatalogName="cat"
+                                 baseTableName="cart"
+                                 baseTableSchemaName="public"
+                                 constraintName="fk_cart_productID"
+                                 deferrable="true"
+                                 initiallyDeferred="true"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="productId"
+                                 referencedTableCatalogName="cat"
+                                 referencedTableName="product"
+                                 referencedTableSchemaName="public"
+                                 validate="true"/>
+    </changeSet>
+
+    <changeSet id="1581764121607-11" author="Admin">
+        <addColumn catalogName="cat"
+                   schemaName="public"
+                   tableName="customer">
+            <column name="final_order_ID" type="UUID"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="1581764121607-12" author="Admin">
+        <addUniqueConstraint
+                columnNames="orderId"
+                constraintName="orderId"
+                tableName="final_order"
+        />
+    </changeSet>
+
+    <changeSet id="1581764121607-13" author="Admin">
+        <addForeignKeyConstraint baseColumnNames="final_order_ID"
+                                 baseTableCatalogName="cat"
+                                 baseTableName="customer"
+                                 baseTableSchemaName="public"
+                                 constraintName="fk_customer_final_order_ID"
+                                 deferrable="true"
+                                 initiallyDeferred="true"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="orderId"
+                                 referencedTableCatalogName="cat"
+                                 referencedTableName="final_order"
+                                 referencedTableSchemaName="public"
+                                 validate="true"/>
+    </changeSet>
+</databaseChangeLog>
