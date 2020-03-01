@@ -17,8 +17,8 @@ public class FinalOrder {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @Column(name = "customer_id")
-    private UUID customerId;
+//    @Column(name = "customer_id")
+//    private UUID customerId;
 
     @Column(name = "cart_id")
     private UUID cartId;

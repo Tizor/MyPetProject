@@ -32,7 +32,7 @@ public class Customer {
     @Column(name = "address")
     private String address;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "customer") // 1 Вариант с двунаправленной связью OneToMany <-> ManyToOne
+//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "customer",  orphanRemoval = true) // 1 Вариант с двунаправленной связью OneToMany <-> ManyToOne
 //    @OneToMany(cascade = CascadeType.ALL)  // 2 Вариант с однонаправленной связью OneToMany и JoinColumn
 //    @JoinColumn(name = "id")  // 2 Вариант с однонаправленной связью OneToMany и JoinColumn (name = ForeignKey)
     private Collection<FinalOrder> customerOrders;
