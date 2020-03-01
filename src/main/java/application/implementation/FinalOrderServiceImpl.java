@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Service
@@ -20,7 +22,7 @@ public class FinalOrderServiceImpl implements FinalOrderService {
 
     @Transactional
     public Collection<FinalOrderDto> getAllOrders() {
-        Collection<FinalOrder> ordersFromDBList = orderRepo.findAll();
+        List<FinalOrder> ordersFromDBList = orderRepo.findAll();
         return orderMapper.mapListOfOrdersToListOfOrdersDto(ordersFromDBList);
     }
 

@@ -8,6 +8,8 @@ import application.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -19,7 +21,7 @@ public class CustomerServiceImpl implements CustomerService {
     private final CustomerMapper customerMapper;
 
     @Transactional
-    public List<CustomerDto> getAllCustomers() {
+    public Collection<CustomerDto> getAllCustomers() {
         List<Customer> customersFromDBList = customerRepo.findAll();
         return customerMapper.mapListOfCustomersToListOfCustomersDto(customersFromDBList);
     }
@@ -27,7 +29,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Transactional
     public void addCustomer(CustomerDto customer) {
         Customer newCustomer = new Customer();
-        customerMapper.mapCustomerFromCustomerCreateDto(newCustomer, customer);
+        customerMapper.mapCustomerFromCustomerDto(newCustomer, customer);
         customerRepo.save(newCustomer);
     }
 

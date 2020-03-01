@@ -5,6 +5,7 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -13,7 +14,7 @@ public interface CustomerService {
 
     @WebMethod(operationName = "getAllCustomers")
     @WebResult(name = "listOfCustomers")
-    List<CustomerDto> getAllCustomers();
+    Collection<CustomerDto> getAllCustomers();
 
     @WebMethod(operationName = "getCustomerById")
     @WebResult(name = "customerById")

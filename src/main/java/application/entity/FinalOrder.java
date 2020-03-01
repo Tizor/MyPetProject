@@ -26,7 +26,7 @@ public class FinalOrder {
     @Column(name = "total_price")
     private double totalPrice;
 
-//    @ManyToOne (fetch=FetchType.LAZY, cascade=CascadeType.ALL)  1 Вариант с двунаправленной связью OneToMany <-> ManyToOne
-//    private Customer customer;  1 Вариант с двунаправленной связью OneToMany <-> ManyToOne
+    @ManyToOne (fetch=FetchType.LAZY, cascade=CascadeType.ALL) //  1 Вариант с двунаправленной связью OneToMany <-> ManyToOne
+    private Customer customer; //  1 Вариант с двунаправленной связью OneToMany <-> ManyToOne
 
 }
