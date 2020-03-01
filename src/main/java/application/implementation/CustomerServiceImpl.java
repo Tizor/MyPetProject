@@ -1,7 +1,6 @@
 package application.implementation;
 
 import application.dao.CustomerRepo;
-import application.dto.CustomerCreateDto;
 import application.dto.CustomerDto;
 import application.entity.Customer;
 import application.mapper.CustomerMapper;
@@ -26,7 +25,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Transactional
-    public void addCustomer(CustomerCreateDto customer) {
+    public void addCustomer(CustomerDto customer) {
         Customer newCustomer = new Customer();
         customerMapper.mapCustomerFromCustomerCreateDto(newCustomer, customer);
         customerRepo.save(newCustomer);

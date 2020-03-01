@@ -1,6 +1,5 @@
 package application.service;
 
-import application.dto.CustomerCreateDto;
 import application.dto.CustomerDto;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -28,6 +27,6 @@ public interface CustomerService {
     void deleteCustomer(@WebParam(name = "id") UUID id);
 
     @WebMethod(operationName = "addCustomer")
-    void addCustomer(@WebParam(name = "customer") CustomerCreateDto customer);
+    void addCustomer(@WebParam(name = "customer") CustomerDto customer);
 
 }

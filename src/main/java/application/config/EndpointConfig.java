@@ -1,6 +1,7 @@
 package application.config;
 
 import application.implementation.CustomerServiceImpl;
+import application.implementation.FinalOrderServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.apache.cxf.Bus;
 import org.apache.cxf.bus.spring.SpringBus;
@@ -14,6 +15,7 @@ import javax.xml.ws.Endpoint;
 public class EndpointConfig {
 
    private final CustomerServiceImpl customerServiceImpl;
+   private final FinalOrderServiceImpl finalOrderService;
 
     @Bean
     public Endpoint customerEndpoint() {
@@ -21,6 +23,14 @@ public class EndpointConfig {
         endpoint.publish("/customer");
         return endpoint;
     }
+
+    @Bean
+    public Endpoint orderEndpoint() {
+        Endpoint endpoint = new EndpointImpl(springBus(), finalOrderService);
+        endpoint.publish("/order");
+        return endpoint;
+    }
+
 
     @Bean(name = Bus.DEFAULT_BUS_ID)
     public SpringBus springBus() {

@@ -1,9 +1,7 @@
 package application.mapper;
 
-import application.dto.CustomerCreateDto;
 import application.dto.CustomerDto;
 import application.entity.Customer;
-import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,12 +9,13 @@ import java.util.List;
 @Component
 public class CustomerMapper {
 
-    public void mapCustomerFromCustomerCreateDto(Customer customer, CustomerCreateDto customerCreateDto) {
+    public void mapCustomerFromCustomerCreateDto(Customer customer, CustomerDto customerCreateDto) {
         customer.setEmail(customerCreateDto.getEmail());
         customer.setAddress(customerCreateDto.getAddress());
         customer.setAge(customerCreateDto.getAge());
         customer.setFirstName(customerCreateDto.getFirstName());
         customer.setLastName(customerCreateDto.getLastName());
+        customer.setCustomerOrders(null);
     }
 
     public Customer mapCustomerFromCustomerDto(Customer customer, CustomerDto customerDto) {
@@ -26,6 +25,7 @@ public class CustomerMapper {
         customer.setAge(customerDto.getAge());
         customer.setAddress(customerDto.getAddress());
         customer.setEmail(customerDto.getEmail());
+        customer.setCustomerOrders(null);
         return customer;
     }
 
@@ -49,6 +49,5 @@ public class CustomerMapper {
          }
          return customersDtoList;
     }
-
 
 }

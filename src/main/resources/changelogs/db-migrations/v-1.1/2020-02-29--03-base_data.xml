@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-    <changeSet id="1581764121607-14" author="Admin">
+    <changeSet author="Admin" id="1581764121608-12">
         <sqlFile dbms="postgresql"
                  encoding="utf8"
                  endDelimiter=";;"
@@ -13,14 +13,6 @@
                  relativeToChangelogFile="false"
                  splitStatements="false"
         />
-    </changeSet>
-
-    <changeSet id="1581764121607-15" author="Admin">
-        <modifyDataType catalogName="cat"
-                        columnName="totalPrice"
-                        newDataType="double"
-                        schemaName="public"
-                        tableName="final_order"/>
     </changeSet>
 
 </databaseChangeLog>
