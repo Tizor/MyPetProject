@@ -1,4 +1,4 @@
-package application.dto;
+package application.dto.finalOrder;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;

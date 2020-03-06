@@ -1,7 +1,7 @@
 package application.dto.customer;
 
 
-import application.dto.FinalOrderDto;
+import application.dto.finalOrder.FinalOrderDto;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import javax.xml.bind.annotation.*;

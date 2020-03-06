@@ -1,7 +1,7 @@
 package application.implementation;
 
 import application.dao.FinalOrderRepo;
-import application.dto.FinalOrderDto;
+import application.dto.finalOrder.FinalOrderDto;
 import application.entity.FinalOrder;
 import application.mapper.FinalOrderMapper;
 import application.service.FinalOrderService;
@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 @Service
@@ -38,6 +37,11 @@ public class FinalOrderServiceImpl implements FinalOrderService {
         FinalOrder orderFromDB = orderRepo.getOne(id);
         FinalOrderDto orderDto = new FinalOrderDto();
         return orderMapper.mapOrderDtoFromOrder(orderFromDB, orderDto);
+    }
+
+    @Override
+    public Collection<FinalOrderDto> getOrdersByCustomerId(UUID customerId) {
+        return null;
     }
 
     @Transactional
