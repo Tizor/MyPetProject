@@ -1,12 +1,11 @@
-package application.dto;
+package application.dto.customer;
 
-import application.entity.FinalOrder;
+
+import application.dto.FinalOrderDto;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-
 import javax.xml.bind.annotation.*;
 import java.util.Collection;
-import java.util.Set;
 import java.util.UUID;
 
 @XmlType
@@ -16,7 +15,6 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class CustomerDto {
 
-    @XmlTransient
     private UUID id;
     private String firstName;
     private String lastName;

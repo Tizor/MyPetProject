@@ -1,7 +1,9 @@
 package application.implementation;
 
 import application.dao.CustomerRepo;
-import application.dto.CustomerDto;
+import application.dto.customer.CustomerCreateDto;
+import application.dto.customer.CustomerDto;
+import application.dto.customer.CustomerForUpdateDto;
 import application.entity.Customer;
 import application.mapper.CustomerMapper;
 import application.service.CustomerService;
@@ -27,9 +29,9 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Transactional
-    public void addCustomer(CustomerDto customer) {
+    public void addCustomer(CustomerCreateDto customer) {
         Customer newCustomer = new Customer();
-        customerMapper.mapCustomerFromCustomerDto(newCustomer, customer);
+        customerMapper.mapCustomerFromCustomerCreateDto(newCustomer, customer);
         customerRepo.save(newCustomer);
     }
 
@@ -46,11 +48,12 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Transactional
-    public CustomerDto updateCustomer(CustomerDto customer) {
+    public CustomerDto updateCustomer(CustomerForUpdateDto customer) {
         Customer customerBeforeUpdate = customerRepo.getOne(customer.getId());
-        Customer customerForUpdate = customerMapper.mapCustomerFromCustomerDto(customerBeforeUpdate, customer);
-        Customer customerAfterUpdate = customerRepo.save(customerForUpdate);
-        return customerMapper.mapCustomerDtoFromCustomer(customerAfterUpdate, customer);
+        Customer customerForUpdate = customerRepo.save(customerMapper.mapUpdateCustomerFromCustomerDto(customerBeforeUpdate, customer));
+        CustomerDto customerDto = new CustomerDto(); //полная хрень. Лучше создание сущности запихнуть в маппер;
+        CustomerDto customerAfterUpdate = customerMapper.mapCustomerDtoFromCustomer(customerForUpdate, customerDto);
+        return customerMapper.mapUpdateCustomerDtoToCustomerDto(customerAfterUpdate, customer);
     }
 
 
