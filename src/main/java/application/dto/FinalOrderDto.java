@@ -17,8 +17,8 @@ import java.util.UUID;
 public class FinalOrderDto {
 
     private UUID id;
-    private UUID customerId;
-    private UUID cartId;
+//    private UUID customerId;
+//    private UUID cartId;
     private double totalPrice;
 
 }

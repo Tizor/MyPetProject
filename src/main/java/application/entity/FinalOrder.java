@@ -17,14 +17,12 @@ public class FinalOrder {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-//    @Column(name = "customer_id")
-//    private UUID customerId;
-
-    @Column(name = "cart_id")
-    private UUID cartId;
-
     @Column(name = "total_price")
     private double totalPrice;
+
+//    @OneToOne (optional=false, cascade=CascadeType.ALL)
+//    @JoinColumn (name="order_id")
+//    private Cart cart; //  1 Вариант с двунаправленной связью OneToMany <-> ManyToOne
 
 //    @ManyToOne (fetch=FetchType.LAZY, cascade=CascadeType.ALL) //  1 Вариант с двунаправленной связью OneToMany <-> ManyToOne
 //    @JoinColumn(name = "customer_id")

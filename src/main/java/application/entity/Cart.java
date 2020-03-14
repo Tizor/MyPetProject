@@ -24,7 +24,11 @@ public class Cart {
     @Column(name = "total_price_for_cart")
     private double totalPriceForCart;
 
-        @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "cart") // 1 Вариант с двунаправленной связью OneToMany <-> ManyToOne
+    @Column(name = "product_amount")
+    private Long productAmount;
+
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "cart") // 1 Вариант с двунаправленной связью OneToMany <-> ManyToOne
 //    @OneToMany(cascade = CascadeType.ALL)  // 2 Вариант с однонаправленной связью OneToMany и JoinColumn
 //    @JoinColumn(name = "cart_id")  // 2 Вариант с однонаправленной связью OneToMany и JoinColumn (name = ForeignKey)
     private Collection<Product> productInCart;

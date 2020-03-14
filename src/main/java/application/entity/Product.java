@@ -20,8 +20,6 @@ public class Product {
     @Column(name = "product_price")
     private double productPrice;
 
-    @Column(name = "product_amount")
-    private Long productAmount;
 
     @ManyToOne (fetch=FetchType.LAZY, cascade=CascadeType.ALL) //  1 Вариант с двунаправленной связью OneToMany <-> ManyToOne
     @JoinColumn(name = "cart_id")

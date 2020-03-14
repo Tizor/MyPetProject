@@ -1,5 +1,4 @@
-package application.dto.customer;
-
+package application.dto.product;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -11,14 +10,10 @@ import javax.xml.bind.annotation.XmlType;
 
 @XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name = "Customer", namespace = "http://application.dto")
+@XmlRootElement(name = "Product", namespace = "http://application.dto")
 @Data
 @RequiredArgsConstructor
-public class CustomerCreateDto {
+public class ProductCreateDto {
 
-    private String firstName;
-    private String lastName;
-    private Long age;
-    private String email;
-    private String address;
+    private double productPrice;
 }

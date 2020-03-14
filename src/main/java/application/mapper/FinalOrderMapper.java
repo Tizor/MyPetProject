@@ -22,7 +22,8 @@ public class FinalOrderMapper {
 
     public FinalOrder mapOrderFromOrderDto(FinalOrder finalOrder, FinalOrderDto orderDto) {
         finalOrder.setId(orderDto.getId());
-        finalOrder.setCartId(orderDto.getCartId());
+//        finalOrder.setCartId(orderDto.getCartId());
+//        finalOrder.setCart(orderDto.getCartId());
 //        finalOrder.setCustomerId(orderDto.getCustomerId());
         finalOrder.setTotalPrice(orderDto.getTotalPrice());
         return finalOrder;
@@ -30,7 +31,7 @@ public class FinalOrderMapper {
 
     public FinalOrderDto mapOrderDtoFromOrder(FinalOrder finalOrder, FinalOrderDto orderDto) {
         orderDto.setId(finalOrder.getId());
-        orderDto.setCartId(finalOrder.getCartId());
+//        orderDto.setCartId(finalOrder.getCartId());
 //        orderDto.setCustomerId(finalOrder.getCustomerId());
         orderDto.setTotalPrice(finalOrder.getTotalPrice());
         return orderDto;

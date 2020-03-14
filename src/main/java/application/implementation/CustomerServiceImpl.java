@@ -51,12 +51,9 @@ public class CustomerServiceImpl implements CustomerService {
     public CustomerDto updateCustomer(CustomerForUpdateDto customer) {
         Customer customerBeforeUpdate = customerRepo.getOne(customer.getId());
         Customer customerForUpdate = customerRepo.save(customerMapper.mapUpdateCustomerFromCustomerDto(customerBeforeUpdate, customer));
-        CustomerDto customerDto = new CustomerDto(); //полная хрень. Лучше создание сущности запихнуть в маппер;
+        CustomerDto customerDto = new CustomerDto();
         CustomerDto customerAfterUpdate = customerMapper.mapCustomerDtoFromCustomer(customerForUpdate, customerDto);
         return customerMapper.mapUpdateCustomerDtoToCustomerDto(customerAfterUpdate, customer);
     }
-
-
-
 
 }

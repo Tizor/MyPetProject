@@ -31,5 +31,4 @@ public interface CustomerService {
 
     @WebMethod(operationName = "addCustomer")
     void addCustomer(@WebParam(name = "customer") CustomerCreateDto customer);
-
 }

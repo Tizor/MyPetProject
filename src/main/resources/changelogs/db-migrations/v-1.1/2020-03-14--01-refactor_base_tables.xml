@@ -1,0 +1,72 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <changeSet author="Admin" id="1681764121600-01">
+<!--        <preConditions onFail="MARK_RAN">-->
+<!--            <not>-->
+<!--                <tableExists tableName="product"/>-->
+<!--            </not>-->
+<!--        </preConditions>-->
+        <dropColumn catalogName="cat"
+                    columnName="product_amount"
+                    schemaName="public"
+                    tableName="product">
+        </dropColumn>
+    </changeSet>
+
+    <changeSet author="Admin" id="1681764121600-02">
+<!--        <preConditions onFail="MARK_RAN">-->
+<!--            <not>-->
+<!--                <tableExists tableName="cart"/>-->
+<!--            </not>-->
+<!--        </preConditions>-->
+        <addColumn catalogName="cat"
+                   schemaName="public"
+                   tableName="cart">
+            <column name="product_amount" type="integer"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet author="Admin" id="1681764121600-03">
+        <!--        <preConditions onFail="MARK_RAN">-->
+        <!--            <not>-->
+        <!--                <tableExists tableName="product"/>-->
+        <!--            </not>-->
+        <!--        </preConditions>-->
+        <dropColumn catalogName="cat"
+                    columnName="cart_id"
+                    schemaName="public"
+                    tableName="final_order">
+        </dropColumn>
+    </changeSet>
+
+    <changeSet author="Admin" id="1681764121600-04">
+        <!--        <preConditions onFail="MARK_RAN">-->
+        <!--            <not>-->
+        <!--                <tableExists tableName="cart"/>-->
+        <!--            </not>-->
+        <!--        </preConditions>-->
+        <addColumn catalogName="cat"
+                   schemaName="public"
+                   tableName="cart">
+            <column name="order_id" type="uuid"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet author="Admin" id="1681764121600-05">
+        <addForeignKeyConstraint baseColumnNames="order_id"
+                                 baseTableCatalogName="cat"
+                                 baseTableName="cart"
+                                 baseTableSchemaName="public"
+                                 constraintName="fk_cart_order_id"
+                                 deferrable="true"
+                                 initiallyDeferred="true"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableCatalogName="cat"
+                                 referencedTableName="final_order"
+                                 referencedTableSchemaName="public"
+                                 validate="true"/>
+    </changeSet>
+
+</databaseChangeLog>
