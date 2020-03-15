@@ -2,10 +2,7 @@ package application.service;
 
 import application.dto.cart.CartCreateDto;
 import application.dto.cart.CartDto;
-import application.dto.customer.CustomerCreateDto;
 import application.dto.customer.CustomerDto;
-import application.dto.customer.CustomerForUpdateDto;
-
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
@@ -21,11 +18,11 @@ public interface CartService {
 
     @WebMethod(operationName = "getCartById")
     @WebResult(name = "cartById")
-    CustomerDto getCartById(@WebParam(name = "id") UUID id);
+    CartDto getCartById(@WebParam(name = "id") UUID id);
 
     @WebMethod(operationName = "updateCustomer")
     @WebResult(name = "customerAfterUpdate")
-    CustomerDto addProductInTheCart(@WebParam(name = "cart") CartDto cartDto);
+    CartDto addProductInTheCart(@WebParam(name = "cart") CartDto cartDto);
 
     @WebMethod(operationName = "deleteCustomer")
     void deleteCart(@WebParam(name = "id") UUID id);

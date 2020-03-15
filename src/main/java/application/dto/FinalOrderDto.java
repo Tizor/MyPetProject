@@ -19,6 +19,6 @@ public class FinalOrderDto {
     private UUID id;
 //    private UUID customerId;
 //    private UUID cartId;
-    private double totalPrice;
+    private Double totalPrice;
 
 }

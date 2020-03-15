@@ -17,6 +17,6 @@ import java.util.UUID;
 public class ProductDto {
 
     private UUID id;
-    private double productPrice;
+    private Double productPrice;
 
 }

@@ -19,10 +19,10 @@ public class Cart {
     private UUID id;
 
     @Column(name = "total_price_for_product")
-    private double totalPriceForProduct;
+    private Double totalPriceForProduct;
 
     @Column(name = "total_price_for_cart")
-    private double totalPriceForCart;
+    private Double totalPriceForCart;
 
     @Column(name = "product_amount")
     private Long productAmount;

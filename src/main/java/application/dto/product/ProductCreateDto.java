@@ -15,5 +15,5 @@ import javax.xml.bind.annotation.XmlType;
 @RequiredArgsConstructor
 public class ProductCreateDto {
 
-    private double productPrice;
+    private Double productPrice;
 }

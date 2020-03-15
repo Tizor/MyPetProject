@@ -18,7 +18,7 @@ public class Product {
     private UUID id;
 
     @Column(name = "product_price")
-    private double productPrice;
+    private Double productPrice;
 
 
     @ManyToOne (fetch=FetchType.LAZY, cascade=CascadeType.ALL) //  1 Вариант с двунаправленной связью OneToMany <-> ManyToOne

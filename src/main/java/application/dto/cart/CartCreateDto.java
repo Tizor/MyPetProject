@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlType;
 @Data
 @RequiredArgsConstructor
 public class CartCreateDto {
-    private double totalPriceForProduct;
-    private double totalPriceForCart;
+    private Double totalPriceForProduct;
+    private Double totalPriceForCart;
     private Long productAmount;
 }

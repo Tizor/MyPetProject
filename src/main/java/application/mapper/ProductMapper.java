@@ -29,7 +29,7 @@ public class ProductMapper {
         return productDto;
     }
 
-    public Collection<ProductDto> mapListOfProductsToListOfProductsDto (List<Product> productList){
+    public Collection<ProductDto> mapListOfProductsToListOfProductsDto (Collection<Product> productList){
         Collection<ProductDto> productsDtoList = new ArrayList<>();
         for (Product productFromList : productList ){
             ProductDto productDto = new ProductDto();

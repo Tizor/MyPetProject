@@ -3,6 +3,9 @@ package application.config;
 import application.implementation.CustomerServiceImpl;
 import application.implementation.FinalOrderServiceImpl;
 import application.implementation.ProductServiceImpl;
+import application.service.CartService;
+import application.service.CustomerService;
+import application.service.FinalOrderService;
 import application.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.apache.cxf.Bus;
@@ -16,13 +19,14 @@ import javax.xml.ws.Endpoint;
 @RequiredArgsConstructor
 public class EndpointConfig {
 
-   private final CustomerServiceImpl customerServiceImpl;
-   private final FinalOrderServiceImpl finalOrderService;
+   private final CustomerService customerService;
+   private final FinalOrderService finalOrderService;
    private final ProductService productService;
+   private final CartService cartService;
 
     @Bean
     public Endpoint customerEndpoint() {
-        Endpoint endpoint = new EndpointImpl(springBus(), customerServiceImpl);
+        Endpoint endpoint = new EndpointImpl(springBus(), customerService);
         endpoint.publish("/customer");
         return endpoint;
     }
@@ -38,6 +42,13 @@ public class EndpointConfig {
     public Endpoint productEndpoint() {
         Endpoint endpoint = new EndpointImpl(springBus(), productService);
         endpoint.publish("/product");
+        return endpoint;
+    }
+
+    @Bean
+    public Endpoint cartEndpoint() {
+        Endpoint endpoint = new EndpointImpl(springBus(), cartService);
+        endpoint.publish("/cart");
         return endpoint;
     }
 

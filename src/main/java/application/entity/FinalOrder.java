@@ -18,7 +18,7 @@ public class FinalOrder {
     private UUID id;
 
     @Column(name = "total_price")
-    private double totalPrice;
+    private Double totalPrice;
 
 //    @OneToOne (optional=false, cascade=CascadeType.ALL)
 //    @JoinColumn (name="order_id")
