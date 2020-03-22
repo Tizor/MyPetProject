@@ -28,7 +28,7 @@ spring:
 #      username: test
 #      password:
 #      changeLog: classpath:/changelogs/liquibase-changeLog3.xml # файл который будет использоваться при запуске
-    enabled: true
+    enabled: false
     contexts: example
 
   #---------------------------------------------------------------------------------------------------------------#
