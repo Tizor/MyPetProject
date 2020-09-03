@@ -27,9 +27,6 @@ public class FinalOrder {
     @Column(name = "order_number")
     private UUID orderNumber;
 
-
-//    @XmlInverseReference(mappedBy="orders")
-    @XmlTransient
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
