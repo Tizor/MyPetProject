@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import java.util.Collection;
+import java.util.Set;
 import java.util.UUID;
 
 @XmlType
@@ -17,9 +18,9 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class CartDto {
 
-    private UUID id;
-    private Double totalPriceForProduct;
-    private Double totalPriceForCart;
-    private Long productAmount;
+    private Long id;
+    private Double price;
+    private Long quanity;
+    private Long amount;
     private Collection<ProductDto> productInCart;
 }

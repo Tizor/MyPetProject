@@ -17,7 +17,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class CustomerForUpdateDto {
 
-    private UUID id;
+    private Long id;
     private String firstName;
     private String lastName;
     private Long age;

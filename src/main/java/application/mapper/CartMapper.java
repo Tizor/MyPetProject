@@ -5,41 +5,37 @@ import application.dto.cart.CartDto;
 import application.entity.Cart;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+
+import java.util.*;
 
 @Component
-@RequiredArgsConstructor
 public class CartMapper {
 
-    private final ProductMapper productMapper;
-
     public void mapCartFromCartCreateDto(Cart cart, CartCreateDto cartCreateDto) {
-        cart.setProductAmount(cartCreateDto.getProductAmount());
-        cart.setTotalPriceForCart(cartCreateDto.getTotalPriceForCart());
-        cart.setTotalPriceForProduct(cartCreateDto.getTotalPriceForProduct());
-        cart.setProductInCart(null);
+        cart.setAmount(cartCreateDto.getAmount());
+        cart.setPrice(cartCreateDto.getPrice());
+        cart.setQuanity(cartCreateDto.getQuanity());
+        cart.setProduct(null);
     }
 
     public Cart mapCartFromCartDto(Cart cart, CartDto cartDto) {
         cart.setId(cartDto.getId());
-        cart.setProductAmount(cartDto.getProductAmount());
-        cart.setTotalPriceForCart(cartDto.getTotalPriceForCart());
-        cart.setTotalPriceForProduct(cartDto.getTotalPriceForProduct());
+        cart.setAmount(cartDto.getAmount());
+        cart.setPrice(cartDto.getPrice());
+        cart.setQuanity(cartDto.getQuanity());
         return cart;
     }
 
     public CartDto mapCartDtoFromCart(Cart cart, CartDto cartDto) {
         cartDto.setId(cart.getId());
-        cartDto.setProductAmount(cart.getProductAmount());
-        cartDto.setTotalPriceForCart(cart.getTotalPriceForCart());
-        cartDto.setTotalPriceForProduct(cart.getTotalPriceForProduct());
-        cartDto.setProductInCart(productMapper.mapListOfProductsToListOfProductsDto(cart.getProductInCart()));
+        cartDto.setAmount(cart.getAmount());
+        cartDto.setPrice(cart.getPrice());
+        cartDto.setQuanity(cart.getQuanity());
+//        cartDto.setProductInCart(productMapper.mapListOfProductsToListOfProductsDto(cart.getProduct()));
         return cartDto;
     }
 
-    public Collection<CartDto> mapListOfCartsToListOfCartsDto (List<Cart> cartList){
+    public Collection<CartDto> mapListOfCartsToListOfCartsDto (Collection<Cart> cartList){
         Collection<CartDto> cartDtoList = new ArrayList<>();
         for (Cart cartFromList : cartList ){
             CartDto cartDto = new CartDto();

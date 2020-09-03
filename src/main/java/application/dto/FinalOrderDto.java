@@ -16,7 +16,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class FinalOrderDto {
 
-    private UUID id;
+    private Long id;
 //    private UUID customerId;
 //    private UUID cartId;
     private Double totalPrice;

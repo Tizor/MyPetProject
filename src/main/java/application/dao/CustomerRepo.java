@@ -2,6 +2,18 @@ package application.dao;
 
 import application.entity.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
-import java.util.UUID;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
-public interface CustomerRepo extends JpaRepository <Customer, UUID> {}
+import java.util.Collection;
+
+public interface CustomerRepo extends JpaRepository <Customer, Long> {
+//
+//    @Query("select DISTINCT cust from Customer cust join fetch cust.orders")
+//    Collection<Customer> getCustomerByFetch();
+//
+//    @Query("select cust from Customer cust join fetch cust.orders where cust.id = :number")
+//    Customer getCustomerFetchById(@Param("number") Long number);
+
+
+}

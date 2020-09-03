@@ -21,9 +21,13 @@ public class FinalOrderServiceImpl implements FinalOrderService {
     private final FinalOrderMapper orderMapper;
 
     @Transactional
-    public Collection<FinalOrderDto> getAllOrders() {
-        List<FinalOrder> ordersFromDBList = orderRepo.findAll();
-        return orderMapper.mapListOfOrdersToListOfOrdersDto(ordersFromDBList);
+    public Collection<FinalOrder> getAllOrders() {
+        return orderRepo.findAll();
+    }
+
+    @Transactional
+    public FinalOrder getOrderById(Long id) {
+        return orderRepo.getOne(id);
     }
 
     @Transactional
@@ -34,14 +38,7 @@ public class FinalOrderServiceImpl implements FinalOrderService {
     }
 
     @Transactional
-    public FinalOrderDto getOrderById(UUID id) {
-        FinalOrder orderFromDB = orderRepo.getOne(id);
-        FinalOrderDto orderDto = new FinalOrderDto();
-        return orderMapper.mapOrderDtoFromOrder(orderFromDB, orderDto);
-    }
-
-    @Transactional
-    public void deleteOrder(UUID id) {
+    public void deleteOrder(Long id) {
         orderRepo.deleteById(id);
     }
 

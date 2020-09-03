@@ -5,6 +5,7 @@ import application.dto.product.ProductCreateDto;
 import application.dto.product.ProductDto;
 import application.entity.Customer;
 import application.entity.Product;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -12,20 +13,30 @@ import java.util.Collection;
 import java.util.List;
 
 @Component
+@RequiredArgsConstructor
 public class ProductMapper {
 
+    private final CartMapper cartMapper;
+
     public void mapProductFromProductCreateDto(Product product, ProductCreateDto productCreateDto) {
-        product.setProductPrice(productCreateDto.getProductPrice());
+        product.setName(productCreateDto.getName());
+        product.setCreateDate(productCreateDto.getCreateDate());
+        product.setPrice(productCreateDto.getProductPrice());
     }
 
     public Product mapProductFromProductDto(Product product, ProductDto productDto) {
-        product.setProductPrice(productDto.getProductPrice());
+        product.setName(productDto.getName());
+        product.setCreateDate(productDto.getCreateDate());
+        product.setPrice(productDto.getProductPrice());
         return product;
     }
 
     public ProductDto mapProductDtoFromProduct(Product product, ProductDto productDto) {
         productDto.setId(product.getId());
-        productDto.setProductPrice(product.getProductPrice());
+        productDto.setName(product.getName());
+        productDto.setProductPrice(product.getPrice());
+        productDto.setCreateDate(productDto.getCreateDate());
+        productDto.setCartDto(cartMapper.mapListOfCartsToListOfCartsDto(product.getCart()));
         return productDto;
     }
 

@@ -22,7 +22,7 @@ public class CustomerMapper {
         customer.setAge(customerCreateDto.getAge());
         customer.setFirstName(customerCreateDto.getFirstName());
         customer.setLastName(customerCreateDto.getLastName());
-        customer.setCustomerOrders(null);
+//        customer.setOrder(null);
     }
 
     public Customer mapCustomerFromCustomerDto(Customer customer, CustomerDto customerDto) {
@@ -52,7 +52,7 @@ public class CustomerMapper {
         customerDto.setAge(customer.getAge());
         customerDto.setAddress(customer.getAddress());
         customerDto.setEmail(customer.getEmail());
-        customerDto.setCustomerOrders((orderMapper.mapListOfOrdersToListOfOrdersDto(customer.getCustomerOrders())));
+        customerDto.setCustomerOrders((orderMapper.mapListOfOrdersToListOfOrdersDto(null)));
         return customerDto;
     }
 

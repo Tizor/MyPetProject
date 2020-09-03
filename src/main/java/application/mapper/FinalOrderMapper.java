@@ -4,6 +4,7 @@ import application.dto.FinalOrderDto;
 import application.entity.FinalOrder;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -38,7 +39,7 @@ public class FinalOrderMapper {
     }
 
     public Collection<FinalOrderDto> mapListOfOrdersToListOfOrdersDto (Collection<FinalOrder> ordersList){
-        Collection<FinalOrderDto> ordersDtoList = new HashSet<>();
+        Collection<FinalOrderDto> ordersDtoList = new ArrayList<>();
 
         for (FinalOrder orderFromList : ordersList ){
             FinalOrderDto orderDto = new FinalOrderDto();

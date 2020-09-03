@@ -4,11 +4,14 @@ import application.dao.CartRepo;
 import application.dto.cart.CartCreateDto;
 import application.dto.cart.CartDto;
 import application.dto.customer.CustomerDto;
+import application.dto.product.ProductDto;
 import application.entity.Cart;
 import application.entity.Customer;
+import application.entity.Product;
 import application.mapper.CartMapper;
 import application.service.CartService;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.Collection;
@@ -20,31 +23,34 @@ import java.util.UUID;
 public class CartServiceImpl implements CartService {
 
     private final CartRepo cartRepo;
-    private final CartMapper cartMapper;
+    private final SessionFactory sessionFactory;
 
     @Transactional
-    public Collection<CartDto> getAllCarts() {
-        List<Cart> cartFromDBList = cartRepo.findAll();
-        return cartMapper.mapListOfCartsToListOfCartsDto(cartFromDBList);
+    public Collection<Cart> getAllCarts() {
+        return cartRepo.findAll();
     }
 
     @Transactional
-    public CartDto getCartById(UUID id) {
-        Cart cartFromDB = cartRepo.getOne(id);
-        CartDto cartDto = new CartDto();
-        return cartMapper.mapCartDtoFromCart(cartFromDB, cartDto);
+    public Cart getCartById(Long id) {
+        return cartRepo.getOne(id);
     }
 
     @Transactional
-    public CartDto addProductInTheCart(CartDto cartDto) {
+    public Cart addProductInTheCart(Cart cartDto) {
         Cart cartBeforeUpdate = cartRepo.getOne(cartDto.getId());
-        Cart cartForUpdate = cartRepo.save(cartMapper.mapCartFromCartDto(cartBeforeUpdate, cartDto));
-        CartDto cartDtoAfterUpdate = cartMapper.mapCartDtoFromCart(cartForUpdate, new CartDto());
-        return cartDtoAfterUpdate;
+        return cartRepo.save(cartBeforeUpdate);
     }
 
     @Transactional
-    public void deleteCart(UUID id) {
+    public List<Product> getCartByCustomerId(Long id) {
+        return sessionFactory
+                .getCurrentSession()
+                .createQuery(" select p from Product p where p.id in (1)", Product.class)
+                .getResultList();
+    }
+
+    @Transactional
+    public void deleteCart(Long id) {
 
     }
 

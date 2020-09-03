@@ -20,14 +20,14 @@ public interface CustomerService {
 
     @WebMethod(operationName = "getCustomerById")
     @WebResult(name = "customerById")
-    CustomerDto getCustomerById(@WebParam(name = "id") UUID id);
+    CustomerDto getCustomerById(@WebParam(name = "id") Long id);
 
     @WebMethod(operationName = "updateCustomer")
     @WebResult(name = "customerAfterUpdate")
     CustomerDto updateCustomer(@WebParam(name = "customer") CustomerForUpdateDto customer);
 
     @WebMethod(operationName = "deleteCustomer")
-    void deleteCustomer(@WebParam(name = "id") UUID id);
+    void deleteCustomer(@WebParam(name = "id") Long id);
 
     @WebMethod(operationName = "addCustomer")
     void addCustomer(@WebParam(name = "customer") CustomerCreateDto customer);

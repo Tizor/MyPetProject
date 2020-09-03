@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import java.util.Date;
 
 @XmlType
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -15,5 +16,7 @@ import javax.xml.bind.annotation.XmlType;
 @RequiredArgsConstructor
 public class ProductCreateDto {
 
+    private String name;
     private Double productPrice;
+    private Date createDate;
 }

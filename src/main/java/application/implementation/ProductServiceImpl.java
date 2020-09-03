@@ -23,34 +23,27 @@ public class ProductServiceImpl implements ProductService {
     @Transactional
     public void addProduct(ProductCreateDto productCreateDto) {
         Product newProduct = new Product();
-        productMapper.mapProductFromProductCreateDto(newProduct, productCreateDto);
         productRepo.save(newProduct);
     }
 
     @Transactional
-    public Collection<ProductDto> getAllProducts() {
-        List<Product> productsFromDBList = productRepo.findAll();
-        return productMapper.mapListOfProductsToListOfProductsDto(productsFromDBList)  ;
+    public Collection<Product> getAllProducts() {
+        return productRepo.findAll();
     }
 
     @Transactional
-    public ProductDto getProductById(UUID id) {
-        Product productFromDB = productRepo.getOne(id);
-        ProductDto productDto = new ProductDto();
-        return productMapper.mapProductDtoFromProduct(productFromDB, productDto);
+    public Product getProductById(Long id) {
+        return productRepo.getOne(id);
     }
 
     @Transactional
-    public ProductDto updateProduct(ProductDto product) {
+    public void updateProduct(Product product) {
         Product productBeforeUpdate = productRepo.getOne(product.getId());
-        productRepo.save(productMapper.mapProductFromProductDto(productBeforeUpdate, product));
-        Product productFromDB = productRepo.getOne(product.getId());
-        ProductDto productDto = new ProductDto();
-        return productMapper.mapProductDtoFromProduct(productFromDB, productDto);
+        productRepo.save(productBeforeUpdate);
     }
 
     @Transactional
-    public void deleteProduct(UUID id) {
+    public void deleteProduct(Long id) {
         productRepo.deleteById(id);
     }
 

@@ -1,6 +1,7 @@
 package application.service;
 
 import application.dto.FinalOrderDto;
+import application.entity.FinalOrder;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -15,14 +16,14 @@ public interface FinalOrderService {
 
     @WebMethod(operationName = "getAllOrders")
     @WebResult(name = "listOfOrders")
-    Collection<FinalOrderDto> getAllOrders();
+    Collection<FinalOrder> getAllOrders();
 
     @WebMethod(operationName = "getOrderById")
     @WebResult(name = "orderById")
-    FinalOrderDto getOrderById(@WebParam(name = "id") UUID id);
+    FinalOrder getOrderById(@WebParam(name = "id") Long id);
 
     @WebMethod(operationName = "deleteOrder")
-    void deleteOrder(@WebParam(name = "id") UUID id);
+    void deleteOrder(@WebParam(name = "id") Long id);
 
     @WebMethod(operationName = "createOrder")
     void createOrder(@WebParam(name = "order") FinalOrderDto order);

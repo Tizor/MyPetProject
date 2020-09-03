@@ -1,21 +1,22 @@
 package application.entity;
 
-import lombok.RequiredArgsConstructor;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlTransient;
 import java.util.*;
 
-
-@Entity
-@Data
+@Getter
+@Setter
 @RequiredArgsConstructor
+@AllArgsConstructor
+@Entity
 @Table(name = "customer")
 public class Customer {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    private Long id;
 
     @Column(name = "first_name")
     private String firstName;
@@ -32,9 +33,8 @@ public class Customer {
     @Column(name = "address")
     private String address;
 
-//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "customer") // 1 Вариант с двунаправленной связью OneToMany <-> ManyToOne
-    @OneToMany(cascade = CascadeType.ALL)  // 2 Вариант с однонаправленной связью OneToMany и JoinColumn
-    @JoinColumn(name = "customer_id")  // 2 Вариант с однонаправленной связью OneToMany и JoinColumn (name = ForeignKey)
-    private Collection<FinalOrder> customerOrders;
+    @XmlTransient
+    @OneToMany(mappedBy = "customer")
+    private Collection<FinalOrder> orders = new ArrayList<>();
 
 }

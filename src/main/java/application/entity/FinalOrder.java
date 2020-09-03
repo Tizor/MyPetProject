@@ -1,31 +1,37 @@
 package application.entity;
 
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
+import org.eclipse.persistence.oxm.annotations.XmlInverseReference;
 
 import javax.persistence.*;
-import java.util.UUID;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
+import java.util.*;
 
-@Entity
-@Data
+@Getter
+@Setter
 @RequiredArgsConstructor
+@AllArgsConstructor
+@Entity
 @Table(name = "final_order")
 public class FinalOrder {
 
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    private Long id;
 
     @Column(name = "total_price")
     private Double totalPrice;
 
-//    @OneToOne (optional=false, cascade=CascadeType.ALL)
-//    @JoinColumn (name="order_id")
-//    private Cart cart; //  1 Вариант с двунаправленной связью OneToMany <-> ManyToOne
+    @Column(name = "order_number")
+    private UUID orderNumber;
 
-//    @ManyToOne (fetch=FetchType.LAZY, cascade=CascadeType.ALL) //  1 Вариант с двунаправленной связью OneToMany <-> ManyToOne
-//    @JoinColumn(name = "customer_id")
-//    private Customer customer; //  1 Вариант с двунаправленной связью OneToMany <-> ManyToOne
+
+//    @XmlInverseReference(mappedBy="orders")
+    @XmlTransient
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
 
 }

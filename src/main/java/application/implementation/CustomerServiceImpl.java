@@ -1,6 +1,7 @@
 package application.implementation;
 
 import application.dao.CustomerRepo;
+import application.dao.FinalOrderRepo;
 import application.dto.customer.CustomerCreateDto;
 import application.dto.customer.CustomerDto;
 import application.dto.customer.CustomerForUpdateDto;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -20,6 +22,7 @@ import java.util.UUID;
 public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepo customerRepo;
+    private final FinalOrderRepo finalOrderRepo;
     private final CustomerMapper customerMapper;
 
     @Transactional
@@ -36,15 +39,16 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Transactional
-    public void deleteCustomer(UUID id) {
+    public void deleteCustomer(Long id) {
         customerRepo.deleteById(id);
     }
 
     @Transactional
-    public CustomerDto getCustomerById(UUID id) {
-        Customer customerFromDB = customerRepo.getOne(id);
+    public CustomerDto getCustomerById(Long id) {
+        Optional<Customer> customerFromDB = customerRepo.findById(id);
+//        customerFromDB.get().setOrder(finalOrderRepo.getFinalOrder(id));
         CustomerDto customerDto = new CustomerDto();
-        return customerMapper.mapCustomerDtoFromCustomer(customerFromDB, customerDto);
+        return customerMapper.mapCustomerDtoFromCustomer(customerFromDB.get(), customerDto);
     }
 
     @Transactional

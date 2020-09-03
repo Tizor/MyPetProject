@@ -2,6 +2,8 @@ package application.service;
 
 import application.dto.product.ProductCreateDto;
 import application.dto.product.ProductDto;
+import application.entity.Product;
+
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
@@ -13,19 +15,19 @@ import java.util.UUID;
 public interface ProductService {
     @WebMethod(operationName = "getAllProducts")
     @WebResult(name = "listOfProducts")
-    Collection<ProductDto> getAllProducts();
+    Collection<Product> getAllProducts();
 
     @WebMethod(operationName = "getProductById")
     @WebResult(name = "productById")
-    ProductDto getProductById(@WebParam(name = "id") UUID id);
+    Product getProductById(@WebParam(name = "id") Long id);
 
     @WebMethod(operationName = "updateProduct")
     @WebResult(name = "productAfterUpdate")
-    ProductDto updateProduct(@WebParam(name = "product") ProductDto product);
+    void updateProduct(@WebParam(name = "product") Product product);
 
     @WebMethod(operationName = "deleteProduct")
-    void deleteProduct(@WebParam(name = "id") UUID id);
+    void deleteProduct(@WebParam(name = "id") Long id);
 
-    @WebMethod(operationName = "addCustomer")
+    @WebMethod(operationName = "addProduct")
     void addProduct(@WebParam(name = "product") ProductCreateDto product);
 }
