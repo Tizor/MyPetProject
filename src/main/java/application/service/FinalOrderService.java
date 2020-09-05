@@ -1,30 +1,16 @@
 package application.service;
 
-import application.dto.FinalOrderDto;
+import application.dto.FinalOrderCreateDto;
 import application.entity.FinalOrder;
 
-import javax.jws.WebMethod;
-import javax.jws.WebParam;
-import javax.jws.WebResult;
-import javax.jws.WebService;
 import java.util.Collection;
-import java.util.List;
-import java.util.UUID;
+import java.util.Optional;
 
-@WebService(serviceName = "FinalOrderService", targetNamespace = "http://soap-online-shop.com")
 public interface FinalOrderService {
 
-    @WebMethod(operationName = "getAllOrders")
-    @WebResult(name = "listOfOrders")
     Collection<FinalOrder> getAllOrders();
-
-    @WebMethod(operationName = "getOrderById")
-    @WebResult(name = "orderById")
-    FinalOrder getOrderById(@WebParam(name = "id") Long id);
-
-    @WebMethod(operationName = "deleteOrder")
-    void deleteOrder(@WebParam(name = "id") Long id);
-
-    @WebMethod(operationName = "createOrder")
-    void createOrder(@WebParam(name = "order") FinalOrderDto order);
+    void createOrder(FinalOrderCreateDto finOrder);
+    void updateOrder(FinalOrder finOrder);
+    void deleteOrder(Long id);
+    Optional<FinalOrder> findOrderById(Long id);
 }

@@ -25,6 +25,6 @@ public class Product {
     @Column(name = "create_Date")
     private Date createDate;
 
-    @OneToMany(mappedBy = "product")
-    private Collection<Cart> cart = new ArrayList<>();
+//    @OneToMany(mappedBy = "product")
+//    private Collection<Cart> cart = new ArrayList<>();
 }

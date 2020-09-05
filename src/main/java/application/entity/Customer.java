@@ -1,21 +1,22 @@
 package application.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlTransient;
 import java.util.*;
 
-@Getter
-@Setter
 @RequiredArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "customer")
 public class Customer {
+
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "first_name")
@@ -33,8 +34,8 @@ public class Customer {
     @Column(name = "address")
     private String address;
 
-    @XmlTransient
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
+//    @JsonManagedReference
     private Collection<FinalOrder> orders = new ArrayList<>();
 
 }

@@ -56,9 +56,9 @@ hibernate:
 #    dialect: org.hibernate.dialect.H2Dialect # for java 11
     showSQL: true
     formatSQL: true
-
-cxf:
-  path: /petProject
+#
+#cxf:
+#  path: /petProject
 
 debug: false
 

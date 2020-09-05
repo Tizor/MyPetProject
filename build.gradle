@@ -2,6 +2,8 @@ plugins {
     id 'java'
 }
 
+def springBootVersion = '2.2.6.RELEASE'
+
 group 'SoapOnlineShop'
 version '1.1-SNAPSHOT'
 
@@ -14,12 +16,14 @@ repositories {
 dependencies {
     compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-netflix-eureka-client', version: '2.2.2.RELEASE'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.2.1.RELEASE'
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.2.1.RELEASE'
+    implementation "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
+    implementation "org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}"
+    implementation "org.springframework.boot:spring-boot-starter-data-rest:${springBootVersion}"
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: '2.2.7.RELEASE'
     compile group: 'de.codecentric', name: 'spring-boot-admin-starter-client', version: '2.1.4'
+    compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-hibernate5', version: '2.10.4'
 
-    compile group: 'org.apache.cxf', name: 'cxf-rt-frontend-jaxws', version: '3.3.4'
-    implementation ('org.apache.cxf:cxf-spring-boot-starter-jaxws:3.2.5') {exclude group: 'javax.validation', module: 'validation-api'}
+
     compile group: 'org.eclipse.persistence', name: 'eclipselink', version: '2.5.0'
 
     //DB & Liquibase
@@ -30,7 +34,7 @@ dependencies {
     //Others
     compile group: 'org.yaml', name: 'snakeyaml', version: '1.25'
     testCompile group: 'junit', name: 'junit', version: '4.12'
-    compile group: 'org.projectlombok', name: 'lombok', version: '1.18.10'
+    compileOnly 'org.projectlombok:lombok:1.18.12'
     annotationProcessor 'org.projectlombok:lombok:1.18.8'
 
     //All dependencies for Java 8 -> Java 11

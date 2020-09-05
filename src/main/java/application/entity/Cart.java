@@ -30,8 +30,8 @@ public class Cart {
 //    @JoinColumn(name = "order_id")
 //    private FinalOrder finalOrder;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "product_id")
-    private Product product;
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "product_id")
+//    private Product product;
 
 }
