@@ -1,6 +1,7 @@
 package application.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.eclipse.persistence.oxm.annotations.XmlInverseReference;
 
@@ -10,7 +11,6 @@ import javax.xml.bind.annotation.XmlTransient;
 import java.util.*;
 
 @RequiredArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -26,8 +26,8 @@ public class FinalOrder {
     private Double totalPrice;
 
     @ManyToOne(fetch = FetchType.EAGER)
-//    @JsonBackReference
     @JoinColumn(name = "customer_id")
+    @JsonIgnoreProperties( "orders" )
     private Customer customer;
 
 }
