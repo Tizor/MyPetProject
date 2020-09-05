@@ -16,11 +16,9 @@ import java.util.Optional;
 public class CustomerServiceImpl implements CustomerService {
 
     private final CustomerRepo customerRepo;
-    private final FinalOrderRepo finalOrderRepo;
 
     public CustomerServiceImpl(CustomerRepo customerRepo, FinalOrderRepo finalOrderRepo) {
         this.customerRepo = customerRepo;
-        this.finalOrderRepo = finalOrderRepo;
     }
 
     @Transactional
@@ -30,13 +28,11 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Transactional
     public Optional<Customer> findCustomerById(Long id) {
-        Optional<Customer> customer = customerRepo.findById(id);
-        customer.get().setOrders(finalOrderRepo.getChildNotes(id));
-        return customer;
+        return customerRepo.getCustomerFetchById(id);
     }
 
     @Transactional
-    public void createCustomer(@RequestBody CustomerCreateDto customerDto) {
+    public void createCustomer(CustomerCreateDto customerDto) {
         Customer customer = new Customer();
         customer.setFirstName(customerDto.getFirstName());
         customer.setLastName(customerDto.getLastName());
@@ -48,7 +44,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Transactional
-    public Customer updateCustomer(@RequestBody Customer customer) {
+    public Customer updateCustomer(Customer customer) {
         return customerRepo.save(customer);
     }
 

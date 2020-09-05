@@ -1,5 +1,6 @@
 package application.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
@@ -26,12 +27,14 @@ public class Cart {
     @Column(name = "amount")
     private Long amount;
 
-//    @ManyToOne
-//    @JoinColumn(name = "order_id")
-//    private FinalOrder finalOrder;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "order_id")
+    @JsonIgnoreProperties( "cart" )
+    private FinalOrder finalOrder;
 
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "product_id")
-//    private Product product;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "product_id")
+    @JsonIgnoreProperties( "cart" )
+    private Product product;
 
 }

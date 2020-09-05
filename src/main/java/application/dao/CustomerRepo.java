@@ -7,14 +7,15 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
+import java.util.Optional;
+
 @Repository
 public interface CustomerRepo extends JpaRepository <Customer, Long> {
-//
-//    @Query("select DISTINCT cust from Customer cust join fetch cust.orders")
-//    Collection<Customer> getCustomerByFetch();
-//
-//    @Query("select cust from Customer cust join fetch cust.orders where cust.id = :number")
-//    Customer getCustomerFetchById(@Param("number") Long number);
 
+    @Query("select DISTINCT cust from Customer cust join fetch cust.orders")
+    Collection<Customer> getCustomerByFetch();
+
+    @Query("select cust from Customer cust join fetch cust.orders where cust.id = :number")
+    Optional<Customer> getCustomerFetchById(@Param("number") Long number);
 
 }

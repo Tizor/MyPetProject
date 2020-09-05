@@ -1,13 +1,8 @@
 package application.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
-import org.eclipse.persistence.oxm.annotations.XmlInverseReference;
-
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
 import java.util.*;
 
 @RequiredArgsConstructor
@@ -29,5 +24,9 @@ public class FinalOrder {
     @JoinColumn(name = "customer_id")
     @JsonIgnoreProperties( "orders" )
     private Customer customer;
+
+    @OneToMany(mappedBy = "finalOrder", fetch = FetchType.LAZY)
+    @JsonIgnoreProperties("finalOrder")
+    private Collection<Cart> cart = new ArrayList<>();
 
 }

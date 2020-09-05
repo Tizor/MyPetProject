@@ -1,5 +1,6 @@
 package application.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
@@ -25,6 +26,7 @@ public class Product {
     @Column(name = "create_Date")
     private Date createDate;
 
-//    @OneToMany(mappedBy = "product")
+//    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY)
+//    @JsonIgnoreProperties( "product" )
 //    private Collection<Cart> cart = new ArrayList<>();
 }
